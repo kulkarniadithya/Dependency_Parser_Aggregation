@@ -83,8 +83,8 @@ if __name__ == "__main__":
 
     datasets = ["en_ewt.conllu"]
 
-    for i in range(0, len(datasets)):
-        current_dataset = datasets[i]
+    for z in range(0, len(datasets)):
+        current_dataset = datasets[z]
         formatted_string = current_dataset.replace(".conllu", "")
 
         with open(save_path + str(formatted_string) + "_sigma_T_dictionary.pickle", "rb") as handle:

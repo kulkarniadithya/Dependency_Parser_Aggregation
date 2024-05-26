@@ -4,30 +4,37 @@
 ## Packages import ##
 import pickle
 import torch
+import numpy as np
 
 
 def compute_theta_00(sensitivity_array, specificity_array, mu_00):
     """Function to compute theta_00"""
-    """Input: sensitivity_array(torch.Tensor(float32)), specificity_array(torch.Tensor(float32)), mu_00(torch.Tensor)
-       Output: theta_00 (tensor.float)"""
+    """Input: sensitivity_array(float32), specificity_array(float32), mu_00
+       Output: theta_00"""
 
-    first_term = torch.log((1 + mu_00)/(1 - mu_00))
-    temp_value = (sensitivity_array*(1-sensitivity_array))/(specificity_array*(1-specificity_array))
-    second_term = temp_value.log()
+    first_term = np.log((1 + mu_00) / (1 - mu_00))
+    second_term = 0
+    for i in range(0, len(sensitivity_array)):
+        temp = (sensitivity_array[i] * (1 - sensitivity_array[i])) / (specificity_array[i] * (1 - specificity_array[i]))
+        print(temp)
+        second_term = second_term + np.log(temp)
 
-    output_array = (first_term/2) + (second_term/4)
-    return output_array
+    value = (first_term / 2) + (second_term / 4)
+    return value
 
 
 def compute_theta_0j(sensitivity_array, specificity_array):
     """Function to compute theta_0j"""
-    """Input: sensitivity_array(torch.Tensor(float32)), specificity_array(torch.Tensor(float32))
-       Output: theta_0j (tensor.float)"""
+    """Input: sensitivity_array(float32), specificity_array(float32)
+       Output: theta_0j"""
 
-    first_term = sensitivity_array*(1-sensitivity_array).log()
-    second_term = specificity_array*(1-specificity_array).log()
+    output_array = []
+    for i in range(0, len(sensitivity_array)):
+        first_term = np.log((sensitivity_array[i]) / (1 - sensitivity_array[i]))
+        second_term = np.log((specificity_array[i]) / (1 - specificity_array[i]))
 
-    output_array = (first_term + second_term)/4
+        value = (first_term + second_term) / 4
+        output_array.append(value)
     return output_array
 
 
@@ -53,8 +60,8 @@ if __name__ == "__main__":
         print(sensitivity_array)
         print(specificity_array)
 
-        theta_00 = compute_theta_00(torch.tensor(sensitivity_array, dtype=torch.float32), torch.tensor(specificity_array, dtype=torch.float32), torch.tensor(class_balance_array[0]))
-        theta_0j = compute_theta_0j(torch.tensor(sensitivity_array, dtype=torch.float32), torch.tensor(specificity_array, dtype=torch.float32))
+        theta_00 = compute_theta_00(sensitivity_array, specificity_array, class_balance_array[0])
+        theta_0j = compute_theta_0j(sensitivity_array, specificity_array)
 
         print(theta_00)
         print(theta_0j)
