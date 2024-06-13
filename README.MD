@@ -18,7 +18,7 @@ https://lindat.mff.cuni.cz/repository/xmlui/handle/11234/1-2885.
 <li>compute_sigma_T.py</li>
 <li>least_squares.py</li>
 <li>independent_exact_solution.py</li>
-<li>python inference.py</li>
+<li>inference.py</li>
 </ul>
 
 <h3>Citation</h3>
