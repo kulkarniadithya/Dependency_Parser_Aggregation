@@ -15,6 +15,10 @@ https://lindat.mff.cuni.cz/repository/xmlui/handle/11234/1-2885.
 <li>format_base_parser_outputs.py: Python file to format the output of base parsers</li>
 <li>sentences_with_same_token_segmentation.py: This python file processes the output of the base parsers to find sentences with same token segmentation</li>
 <li>create_binary_labeled_dataset.py: This python file creates binary labeled dataset for Ising model using the sentences with same token segmentation</li>
+<li>compute_sigma_T.py</li>
+<li>least_squares.py</li>
+<li>independent_exact_solution.py</li>
+<li>inference.py</li>
 </ul>
 
 <h3>Citation</h3>
